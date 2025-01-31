@@ -14,25 +14,28 @@ datasource db {
 }
 
 model Page {
-  id              String         @id @default(uuid())
+  id              String          @id @default(uuid())
   title           String
-  content         String         @default("") // Store rich text content
+  content         String          @default("") // Store rich text content
   parentId        String?
-  parent          Page?          @relation("ParentChild", fields: [parentId], references: [id])
-  children        Page[]         @relation("ParentChild")
-  createdAt       DateTime       @default(now())
-  updatedAt       DateTime       @updatedAt
-  userToPageMap   UserToPageMap? @relation(fields: [userToPageMapId], references: [id])
+  parent          Page?           @relation("ParentChild", fields: [parentId], references: [id])
+  children        Page[]          @relation("ParentChild")
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+  userToPageMap   UserToPageMap[]
   userToPageMapId String?
+
+  @@index([userToPageMapId])
 }
 
 model User {
-  id              String         @id @default(uuid())
+  id              String          @id @default(uuid())
   name            String
-  userId          String // Unique identifier for the user (e.g., client ID)
-  updatedAt       DateTime       @updatedAt
-  userToPageMap   UserToPageMap? @relation(fields: [userToPageMapId], references: [id])
+  updatedAt       DateTime        @updatedAt
+  userToPageMap   UserToPageMap[]
   userToPageMapId String?
+
+  @@index([userToPageMapId])
 }
 
 model UserToPageMap {
@@ -40,6 +43,10 @@ model UserToPageMap {
   role   String
   userId String
   pageId String
-  user   User[]
-  page   Page[]
+  user   User   @relation(fields: [userId], references: [id])
+  page   Page   @relation(fields: [pageId], references: [id])
+
+  @@unique([userId, pageId], name: "userId_pageId")
+  @@index([userId, pageId], name: "userId_pageId")
+  @@index([userId], name: "userId")
 }
