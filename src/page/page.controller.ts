@@ -17,10 +17,13 @@ export class PageController {
 
   @Post()
   create(@Body() createPageDto: CreatePageDto) {
-    return this.pageService.create(createPageDto);
+    return this.pageService.create(
+      createPageDto,
+      'b10df8f2-b022-422b-a3c1-f42ab9aada21',
+    );
   }
 
-  @Get()
+  @Get('pages')
   findAll() {
     return this.pageService.findAll();
   }

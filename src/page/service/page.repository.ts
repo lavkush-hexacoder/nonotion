@@ -8,14 +8,14 @@ import { Injectable } from '@nestjs/common';
 export class PageRepository {
   constructor(private readonly prisma: PrismaService) {}
 
-  async create(data: CreatePageDto): Promise<Page> {
+  async create(data: CreatePageDto, userId: string): Promise<Page> {
     return this.prisma.page.create({
       data: {
-        title: data.title,
+        ...data,
         userToPageMap: {
           create: {
             role: 'OWNER',
-            userId: data.userId,
+            userId: userId,
           },
         },
       },
@@ -24,11 +24,17 @@ export class PageRepository {
   }
 
   async findAll(): Promise<Page[]> {
-    return this.prisma.page.findMany();
+    return this.prisma.page.findMany({
+      where: { parentId: null },
+      include: { children: true },
+    });
   }
 
   async findOne(id: string): Promise<Page | null> {
-    return this.prisma.page.findUnique({ where: { id } });
+    return this.prisma.page.findUnique({
+      where: { id },
+      include: { children: true },
+    });
   }
 
   async update(id: string, data: UpdatePageDto): Promise<Page> {

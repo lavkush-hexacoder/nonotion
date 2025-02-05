@@ -6,16 +6,16 @@ import { PageRepository } from './page.repository';
 @Injectable()
 export class PageService {
   constructor(private readonly pageRepository: PageRepository) {}
-  create(createPageDto: CreatePageDto) {
-    return this.pageRepository.create(createPageDto);
+  create(createPageDto: CreatePageDto, userId: string) {
+    return this.pageRepository.create(createPageDto, userId);
   }
 
   findAll() {
-    return `This action returns all Page`;
+    return this.pageRepository.findAll();
   }
 
   findOne(id: string) {
-    return `This action returns a #${id} Page`;
+    return this.pageRepository.findOne(id);
   }
 
   update(id: string, updatePageDto: UpdatePageDto) {

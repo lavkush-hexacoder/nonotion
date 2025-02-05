@@ -43,8 +43,8 @@ model UserToPageMap {
   role   String
   userId String
   pageId String
-  user   User   @relation(fields: [userId], references: [id])
-  page   Page   @relation(fields: [pageId], references: [id])
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  page   Page   @relation(fields: [pageId], references: [id], onDelete: Cascade)
 
   @@unique([userId, pageId], name: "userId_pageId")
   @@index([userId, pageId], name: "userId_pageId")
