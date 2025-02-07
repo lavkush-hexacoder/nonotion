@@ -26,7 +26,6 @@ export class PageRepository {
   async findAll(): Promise<Page[]> {
     return this.prisma.page.findMany({
       where: { parentId: null },
-      include: { children: true },
     });
   }
 
