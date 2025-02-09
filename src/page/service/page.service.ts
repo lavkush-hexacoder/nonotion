@@ -19,8 +19,8 @@ export class PageService {
   }
 
   update(id: string, updatePageDto: UpdatePageDto) {
-    return `This action updates a #${id} Page`;
-  }
+    return this.pageRepository.update(id, updatePageDto);
+  } 
 
   remove(id: string) {
     return `This action removes a #${id} Page`;
