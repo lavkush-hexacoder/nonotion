@@ -29,7 +29,7 @@ let PageService = class PageService {
         return this.pageRepository.update(id, updatePageDto);
     }
     remove(id) {
-        return `This action removes a #${id} Page`;
+        return this.pageRepository.remove(id);
     }
 };
 exports.PageService = PageService;

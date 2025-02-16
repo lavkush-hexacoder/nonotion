@@ -23,6 +23,6 @@ export class PageService {
   } 
 
   remove(id: string) {
-    return `This action removes a #${id} Page`;
+    return this.pageRepository.remove(id);
   }
 }

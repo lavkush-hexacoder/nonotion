@@ -6,39 +6,47 @@ export declare class PageService {
     constructor(pageRepository: PageRepository);
     create(createPageDto: CreatePageDto, userId: string): Promise<{
         id: string;
-        updatedAt: Date;
-        userToPageMapId: string | null;
         title: string;
         content: string;
         parentId: string | null;
         createdAt: Date;
+        updatedAt: Date;
+        userToPageMapId: string | null;
     }>;
     findAll(): Promise<{
         id: string;
-        updatedAt: Date;
-        userToPageMapId: string | null;
         title: string;
         content: string;
         parentId: string | null;
         createdAt: Date;
+        updatedAt: Date;
+        userToPageMapId: string | null;
     }[]>;
     findOne(id: string): Promise<{
         id: string;
-        updatedAt: Date;
-        userToPageMapId: string | null;
         title: string;
         content: string;
         parentId: string | null;
         createdAt: Date;
+        updatedAt: Date;
+        userToPageMapId: string | null;
     }>;
     update(id: string, updatePageDto: UpdatePageDto): Promise<{
         id: string;
-        updatedAt: Date;
-        userToPageMapId: string | null;
         title: string;
         content: string;
         parentId: string | null;
         createdAt: Date;
+        updatedAt: Date;
+        userToPageMapId: string | null;
     }>;
-    remove(id: string): string;
+    remove(id: string): Promise<{
+        id: string;
+        title: string;
+        content: string;
+        parentId: string | null;
+        createdAt: Date;
+        updatedAt: Date;
+        userToPageMapId: string | null;
+    }>;
 }
