@@ -34,7 +34,7 @@ export class PageRepository {
       where: { id },
       include: { children: true },
     });
-  }  
+  }
 
   async update(id: string, data: UpdatePageDto): Promise<Page> {
     return this.prisma.page.update({ where: { id }, data });
