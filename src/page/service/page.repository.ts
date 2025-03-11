@@ -29,7 +29,7 @@ export class PageRepository {
     });
   }
 
-  async findOne(id: string): Promise<Page | null> {
+  async findOne(id: string): Promise<Page | null> { 
     return this.prisma.page.findUnique({
       where: { id },
       include: { children: true },
