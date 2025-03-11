@@ -12,12 +12,12 @@ export class PageRepository {
     return this.prisma.page.create({
       data: {
         ...data,
-        userToPageMap: {
-          create: {
-            role: 'OWNER',
-            userId: userId,
-          },
-        },
+        // userToPageMap: {
+        //   create: {
+        //     role: 'OWNER',
+        //     userId: userId,
+        //   },
+        // },
       },
       include: { userToPageMap: true },
     });
